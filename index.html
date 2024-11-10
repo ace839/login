@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Estilos semelhantes ao anterior */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+        }
+        h1 {
+            color: #4a4a4a;
+            margin-bottom: 24px;
+        }
+        .form-group {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .link {
+            margin-top: 15px;
+            color: #333;
+            text-decoration: none;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Login</h1>
+    <form id="loginForm">
+        <div class="form-group">
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+        </div>
+        <div class="form-group">
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+        </div>
+        <button type="button" class="btn" onclick="loginUsuario()">Entrar</button>
+    </form>
+    <p class="link">Ainda não tem uma conta? <a href="https://ace839.github.io/cadastro/" target="_blank">Cadastre-se</a></p>
+</div>
+
+<script>
+    function loginUsuario() {
+        const email = document.getElementById("email").value;
+        const senha = document.getElementById("senha").value;
+
+        if (email && senha) {
+            const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+            const usuario = usuarios.find(usuario => usuario.email === email);
+
+            if (usuario) {
+                if (usuario.senha === senha) {
+                    alert("Login bem-sucedido!");
+                    window.location.href = "painel.html"; // Redireciona para o painel do motorista/passageiro
+                } else {
+                    alert("Senha incorreta.");
+                }
+            } else {
+                alert("E-mail não encontrado.");
+            }
+        } else {
+            alert("Por favor, preencha todos os campos.");
+        }
+    }
+</script>
+
+</body>
+</html>
